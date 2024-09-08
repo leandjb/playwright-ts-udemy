@@ -33,7 +33,12 @@ export default defineConfig({
     // headless:false,
     // trace: 'on-first-retry',
     // trace: 'retain-on-failure',
+
     trace: 'on',
+    video: 'on',
+    launchOptions: {
+      slowMo: 1000
+    }
   },
 
   /* Configure projects for major browsers */
