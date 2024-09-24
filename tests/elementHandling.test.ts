@@ -21,7 +21,7 @@ test('button with double click', async ({ page }) => {
     await page.locator('#click_area').dblclick()
 
     await expect(page.locator('#click_type')).toBeVisible()
-    await expect(page.locator('#click_type')).toHaveText('Double-Click')
+    await expect(page.locator('#click_type')).toHaveText  ('Double-Click')
 })
 
 test('button with right click', async ({ page }) => {
