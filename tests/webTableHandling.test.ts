@@ -1,7 +1,7 @@
 import { table } from "console";
 import {test, expect} from "playwright/test";
 
-test('handing web table', async ({ page }) => {
+test('handling web table', async ({ page }) => {
     await page.goto("https://testautomationpractice.blogspot.com/")
 
     const simpleTable = page.locator("table[name='BookTable']")
@@ -20,10 +20,16 @@ test('handing web table', async ({ page }) => {
 })
 
 
-test('selecting single checkbox in the table', async ({ page }) => {
+test.only('selecting single checkbox in the table', async ({ page }) => {
     await page.goto("https://testautomationpractice.blogspot.com/")
+    const multipleTable = page.locator("table#productTable")
+    const multipleTableColumns = multipleTable.locator("thead tr th")
+    const multipleTableRows = multipleTable.locator("tbody tr")
 
+    selectProductOnTable(multipleTableRows, page, 'Product 1')
+    selectProductOnTable(multipleTableRows, page, 'Product 5')
 
+    await page.pause()
     await page.close()    
 })
 
@@ -34,3 +40,10 @@ test('selecting multiple checkbox in the table', async ({ page }) => {
     await page.close()    
 })
 
+async function selectProductOnTable(rows, page, productName) {
+    const matchedRows = rows.filter({
+        has: page.locator('td'),
+        hasText: productName
+    })
+    await matchedRows.locator('input').check()
+}
