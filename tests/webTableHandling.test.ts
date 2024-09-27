@@ -20,16 +20,17 @@ test('handling web table', async ({ page }) => {
 })
 
 
-test.only('selecting single checkbox in the table', async ({ page }) => {
+test('selecting single checkbox in the table', async ({ page }) => {
     await page.goto("https://testautomationpractice.blogspot.com/")
     const multipleTable = page.locator("table#productTable")
     const multipleTableColumns = multipleTable.locator("thead tr th")
     const multipleTableRows = multipleTable.locator("tbody tr")
 
+    await multipleTable.scrollIntoViewIfNeeded()
+
     selectProductOnTable(multipleTableRows, page, 'Product 1')
     selectProductOnTable(multipleTableRows, page, 'Product 5')
 
-    await page.pause()
     await page.close()    
 })
 
@@ -45,5 +46,6 @@ async function selectProductOnTable(rows, page, productName) {
         has: page.locator('td'),
         hasText: productName
     })
+    
     await matchedRows.locator('input').check()
 }

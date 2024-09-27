@@ -35,3 +35,6 @@ test('button with right click', async ({ page }) => {
     await expect(page.locator('#click_type')).toBeVisible()
     await expect(page.locator('#click_type')).toHaveText('Right-Click')
 })
+
+
+
